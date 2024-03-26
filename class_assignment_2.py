@@ -1,3 +1,4 @@
+# making the changes for version 1 in the feature-1 branch
 # the base code of class assignment q2
 import torch
 import torch.nn as nn
@@ -68,9 +69,11 @@ def train(model, optimizer, criterion, train_loader):
     train_loss = running_loss / len(train_loader.dataset)
     train_accuracy = correct / total
     return train_loss, train_accuracy
+# Define the learning rate scheduler
+scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
 # Training loop
-def train_loop(model, optimizer, criterion, train_loader, num_epochs=10):
+def train_loop(model, optimizer, scheduler, criterion, train_loader, num_epochs=10):
     train_losses = []
     train_accuracies = []
 
@@ -78,6 +81,7 @@ def train_loop(model, optimizer, criterion, train_loader, num_epochs=10):
         train_loss, train_accuracy = train(model, optimizer, criterion, train_loader)
         train_losses.append(train_loss)
         train_accuracies.append(train_accuracy)
+        scheduler.step()  # Step the scheduler
         print(f"Epoch [{epoch+1}/{num_epochs}], Train Loss: {train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}")
 
     return train_losses, train_accuracies
