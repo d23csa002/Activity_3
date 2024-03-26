@@ -1,3 +1,4 @@
+# making the changes for version 2 in the feature-2 branch 
 # making the changes for version 1 in the feature-1 branch
 # the base code of class assignment q2
 import torch
@@ -32,6 +33,7 @@ test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
 resnet = models.resnet101(pretrained=True)
 num_ftrs = resnet.fc.in_features
 resnet.fc = nn.Linear(num_ftrs, 10)  # FashionMNIST has 10 classes
+
 
 # Move model to device
 resnet = resnet.to(device)
